@@ -1,0 +1,15 @@
+.fill-width {
+    width: 100% ;
+}
+
+.bal-padding {
+    padding-left: 10px;
+}
+
+.payment-in {
+    color: green;
+}
+
+.payment-out {
+    color: red;
+}

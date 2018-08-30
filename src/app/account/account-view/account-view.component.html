@@ -1,0 +1,168 @@
+<div class="container" [hidden]="accountNotExist">
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="card">
+        <div class="card-header">
+          <h4 class="text-center">
+            <span *ngIf="!loading">
+              <i class="fa fa-credit-card"></i> Account</span>
+            <span *ngIf="loading">
+              <i class="fa fa-spinner fa-pulse"></i> Loading...</span>
+          </h4>
+
+        </div>
+        <div class="card-body" *ngIf="account">
+
+          <div class="row col-md-12">
+            <div class="col-md-3">
+              <img src="https://chart.googleapis.com/chart?chs=140x140&chld=M%7C0&cht=qr&chl={{accId}}" alt="account qrcode" />
+            </div>
+            <div class="col-md-9">
+              <div class="table-responsive">
+                <table class="table table-sm table-borderless" *ngIf="accId">
+                  <tbody>
+                    <tr>
+                      <th>Public Address</th>
+                      <td colspan="2">{{accId}}</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+
+              <h5>
+                <small>XLM</small>
+                <b>
+                  <i class="bal-padding">{{stellar.numberWithCommas(accBalance)}}</i>
+                </b>
+              </h5>
+            </div>
+          </div>
+          <div *ngIf='account'>
+
+
+            <div class="row col-md-12" *ngIf="account.balances.length > 1">
+              <div class="card fill-width">
+                <div class="card-header">
+                  <h5 class="text-center">
+                    <span *ngIf="!loading">
+                      <i class="fa fa-credit-card"></i> Assets</span>
+                    <span *ngIf="loading">
+                      <i class="fa fa-spinner fa-pulse"></i>Assets = Loading...</span>
+                  </h5>
+
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive-md fill-width">
+                    <table class="table table-sm">
+                      <thead>
+                        <th scope="col">#</th>
+                        <th>Code</th>
+                        <th>Limit</th>
+                        <th>Issuer</th>
+                        <th>Balance</th>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let r of account.balances; let i = index">
+                          <th *ngIf="r.asset_type !== 'native'">{{i + 1}}</th>
+                          <td *ngIf="r.asset_type !== 'native'">{{r.asset_code}}</td>
+                          <td *ngIf="r.asset_type !== 'native'"> {{stellar.numberWithCommas(r.limit)}}</td>
+                          <td *ngIf="r.asset_issuer">
+                            <a href="#/account/{{r.asset_issuer}}">{{r.asset_issuer.substring(0,6)}}...{{r.asset_issuer.substring(r.asset_issuer.length - 6,r.asset_issuer.length)}}</a>
+                          </td>
+                          <td *ngIf="r.asset_type !== 'native'">{{stellar.numberWithCommas(r.balance)}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row col-md-12">
+            <div class="table-responsive-lg fill-width">
+              <table class="table table-sm">
+                <thead>
+                  <th scope="col">#</th>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>From</th>
+                  <th>To</th>
+                  <th>Value</th>
+
+                </thead>
+                <tbody>
+                  <tr *ngFor="let operation of accountOps; let i = index">
+                    <th scope="row">{{i + 1}}</th>
+                    <td class="text-nowrap">{{operation.created_at | date:'yyyy-MM-dd HH:mm'}}</td>
+                    <td><a href="#/tx/{{operation.transaction_hash}}">{{operation.txType}}</a></td>
+
+                    <td>
+                      <a href="#/account/{{operation.source_account}}">{{operation.source_account.substring(0,3)}}...{{operation.source_account.substring(operation.source_account.length
+                        - 3,operation.source_account.length)}}</a>
+                    </td>
+                    <td *ngIf="operation.to && operation.type !== 'create_account'">
+                      <a href="#/account/{{operation.to}}">{{operation.to.substring(0,3)}}...{{operation.to.substring(operation.to.length - 3,operation.to.length)}}</a>
+                    </td>
+
+                    <td *ngIf="operation.account && operation.type === 'create_account'">
+                      <a href="#/account/{{operation.account}}">{{operation.account.substring(0,3)}}...{{operation.account.substring(operation.account.length - 3,operation.account.length)}}</a>
+                    </td>
+
+                    <td *ngIf="!operation.to && operation.type !== 'account_merge' && operation.type !== 'create_account'"></td>
+                    <td *ngIf="!operation.to && operation.type === 'account_merge'" colspan="2">
+                      <a href="#/account/{{operation.into}}">{{operation.into.substring(0,3)}}...{{operation.into.substring(operation.into.length - 3,operation.into.length)}}</a>
+                    </td>
+
+                    <td *ngIf="operation.type === 'payment' && operation.asset_type!=='native'">
+
+                      <span *ngIf="accId === operation.source_account" class="payment-out">
+                        <i class="fa fa-caret-square-right"></i>{{operation.asset_code}} -{{stellar.numberWithCommas(operation.amount)}}</span>
+                      <span *ngIf="accId === operation.to" class="payment-in">
+                        <i class="fa fa-caret-square-left"></i>{{operation.asset_code}} {{stellar.numberWithCommas(operation.amount)}}</span>
+                    </td>
+                    <td *ngIf="operation.type === 'manage_offer' && operation.buying_asset_code">{{operation.buying_asset_code}} BUY</td>
+                    <td *ngIf="operation.type === 'manage_offer' && !operation.buying_asset_code">{{operation.selling_asset_code}} {{operation.offer_id}}</td>
+
+                    <td *ngIf="operation.type === 'change_trust'">{{operation.asset_code}}</td>
+                    <td *ngIf="operation.type === 'payment' && operation.asset_type==='native'">
+                      <span *ngIf="accId === operation.source_account" class="payment-out">
+                        <i class="fa fa-caret-square-right"></i>XLM -{{stellar.numberWithCommas(operation.amount)}}</span>
+                      <span *ngIf="accId === operation.to" class="payment-in">
+                        <i class="fa fa-caret-square-left"></i>XLM {{stellar.numberWithCommas(operation.amount)}}</span>
+                    </td>
+                    <td *ngIf="operation.type === 'create_account'">
+                      <span class="payment-out">
+                        <i class="fa fa-caret-square-right"></i>XLM -{{stellar.numberWithCommas(operation.starting_balance)}}</span>
+                    </td>
+
+
+
+                    
+
+                  </tr>
+                </tbody>
+              </table>
+
+              <button class='btn btn-lg btn-primary' (click)="loadMore()" *ngIf="!loadingOps">Load More</button>
+              <button class='btn btn-lg btn-primary' (click)="loadMore()" disabled *ngIf="loadingOps">Loading...
+                <i class="fa fa-spinner fa-pulse"></i>
+              </button>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="accountNotExist">
+  <h1>Account does not exist</h1>
+  <small>{{accId}}</small>
+</div>

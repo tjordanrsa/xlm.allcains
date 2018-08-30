@@ -1,0 +1,28 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-border">
+  <a class="navbar-brand" routerLink="/landing"><img src="/assets/rocket-96x96.png" width="30" height="30" alt=""> AllChains - Stellar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/landing">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/account">Account</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/tx">TX View</a>
+      </li>
+   
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2 search-expand search-expand-animate" type="search" placeholder="Tx / Account / Ledger" aria-label="Search" (keyup.enter)="search($event)">
+    </form>
+  </div>
+</nav>

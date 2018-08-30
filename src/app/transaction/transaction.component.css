@@ -1,0 +1,12 @@
+.center {
+    margin: auto;
+    min-width: 400px;
+}
+
+.stretch {
+    width: 100%;
+}
+
+.row-padding {
+    margin: 10px;
+}

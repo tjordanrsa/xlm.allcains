@@ -1,0 +1,47 @@
+
+  <button (click)="createAccount()">Create Account</button>
+
+
+  <p>
+    <label>Public Key:</label>
+    <input [(ngModel)]="pubKey" type="text" />
+  </p>
+
+  <p>
+    <label>Secret Key:</label>
+    <input [(ngModel)]="secKey" type="text" />
+  </p>
+
+  <button (click)="getAccountBalance()">Get Balance</button>
+
+  <p>
+    <span *ngIf="accLoaded">
+      <strong> Balance: </strong>{{accBalance}} XLM - sequence: {{accSeq}}</span>
+    <span *ngIf="accLoading">
+      <strong> Loading account</strong>
+    </span>
+  </p>
+
+  <button (click)="getTranDetail()">Get Tran Detail</button>
+
+    <pre>{{tranIdRes|json}}</pre>
+    <pre>{{tranXDR|json}}</pre>
+
+    <button type="button" class="btn btn-primary">Primary</button>
+<button type="button" class="btn btn-secondary">Secondary</button>
+<button type="button" class="btn btn-success">Success</button>
+<button type="button" class="btn btn-danger">Danger</button>
+<button type="button" class="btn btn-warning">Warning</button>
+<button type="button" class="btn btn-info">Info</button>
+<button type="button" class="btn btn-light">Light</button>
+<button type="button" class="btn btn-dark">Dark</button>
+
+<button type="button" class="btn btn-link">Link</button>
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  

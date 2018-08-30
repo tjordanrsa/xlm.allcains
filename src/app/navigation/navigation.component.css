@@ -1,0 +1,19 @@
+.navbar-border {
+  border-bottom: solid #117a8b;
+}
+
+.search-expand {
+  width: 150px;
+}
+
+.search-expand:focus {
+  width: 400px;
+}
+
+.search-expand-animate {
+  -webkit-transition: width 0.5s ease-in-out;
+  -moz-transition: width 0.5s ease-in-out;
+  -o-transition: width 0.5s ease-in-out;
+  transition: width 0.5s ease-in-out;
+}
+

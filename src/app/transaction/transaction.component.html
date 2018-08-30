@@ -1,0 +1,23 @@
+<div class="container-fluid">
+
+  <div class="row col-md-12">
+    <div class="card center">
+      <div class="card-header">
+        <h5>Check Transaction Status</h5>
+      </div>
+      <div class="card-body row-padding">
+
+        <div class="form-group">
+          <label for="txID">Transaction ID</label>
+          <input #txID type="text" class="form-control" id="txID" aria-describedby="txID" placeholder="Enter/Paste tx id" [(ngModel)]="txId" (keyup.enter)="findAccount()">
+          
+        </div>
+
+        <div class="row">
+            <button type="button" class="btn btn-primary stretch" (click)="findAccount()">Find Transaction</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

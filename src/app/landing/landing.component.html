@@ -1,0 +1,86 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="text-center">Ledgers</h5>
+          <!-- <button class="btn btn-primary pull-left" (click)="stopStream()">Stop Stream</button> -->
+        </div>
+
+        <table class="table table-sm table-bordered">
+          <thead class="thead-light">
+            <tr>
+              <th class="text-center">Sequence</th>
+              <th class="text-center">Date</th>
+              <th class="text-center">Transactions</th>
+              <th class="text-center">Operations</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of ledgerRecords ; let i = index" [ngClass]="{'table-warning':row.isnew}">
+              <td class="text-center"><a href="#/ledger/{{row.id}}">{{row.sequence}}</a></td>
+              <td class="text-center">{{row.closed_at | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+              <td class="text-center">{{row.transaction_count}}</td>
+              <td class="text-center">{{row.operation_count}}</td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+      <!--end card area for ledgers-->
+
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="text-center">Statistics</h5>
+        </div>
+
+        
+        <div class="coinmarketcap-currency-widget" data-currencyid="512" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+
+        </div>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="text-center">Transactions</h5>
+          <!-- <button class="btn btn-primary pull-left" (click)="stopStream()">Stop Stream</button>-->
+        </div>
+
+        <table class="table table-sm table-bordered">
+          <thead class="thead-light">
+            <tr>
+              <th class="text-center">ID</th>
+              <th class="text-center">Ledger</th>
+              <th class="text-center">Date</th>
+              <th class="text-center">Type</th>
+              <th class="text-center">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of txRecords ; let i = index" [ngClass]="{'table-warning':row.isnew}">
+              <td class="text-center" (click)="tranOutput(row)">
+                <a href="#/tx/{{row.id}}">{{row.id.substring(0,12)}}</a></td>
+              <td class="text-center">{{row.ledger_attr}}</td>
+              <td class="text-center">{{row.created_at | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+              <td class="text-center" *ngIf="row.asset">{{row.tranType}}</td>
+              <td class="text-center" *ngIf="!row.asset" colspan="2">{{row.tranType}}</td>
+              
+              <td class="text-center" *ngIf="row.asset">{{row.asset.code}}  {{row.tran.operations[0].amount}}</td>
+           
+              
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+      <!-- <pre>{{txRecords|json}}</pre> -->
+    </div>
+  </div>
+
+

@@ -1,0 +1,76 @@
+
+
+<div class="container" [hidden]="txNotExist">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="text-center">
+              <span *ngIf="!loading"><i class="fa fa-credit-card"></i> Transaction Detail</span>
+            <span *ngIf="loading"><i class="fa fa-spinner fa-pulse" ></i> Loading...</span>
+          </h4>
+            
+        </div>
+        <br />
+        <h6 class="text-muted text-center">{{txId}}</h6>
+
+        <div class="table-responsive">
+          <table class="table table-sm table-borderless" *ngIf="txDetail">
+            <tbody>
+              <tr>
+                <th>Created At</th>
+                <td>{{txDetail.created_at | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <th>Fee</th>
+                <td>{{txFee}}</td>
+              </tr>
+              <tr>
+                
+              </tr>
+              <tr>
+                <th>Paging Token</th>
+                <td>{{txDetail.paging_token}}</td>
+                <th>Sequence</th>
+                <td>{{ops.sequence}}</td>
+              </tr>
+              <tr>
+                  <th>Ledger</th>
+                  <td>{{txDetail.ledger_attr}}</td>
+                  <th>Memo</th>
+                  <td *ngIf="txDetail.memo">{{txDetail.memo}}</td>
+                  <td *ngIf="!txDetail.memo">N/A</td>
+              </tr>
+              <tr>
+                <th>Signatures</th>
+                <td colspan="3">
+                  <p *ngFor="let sign of txDetail.signatures">{{sign}}</p>
+
+                </td>
+              </tr>
+            
+            </tbody>
+          </table>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <div class="row" *ngIf="ops">
+    <div class="col-md-12">
+
+          <div *ngFor="let op of ops.operations;let i = index">
+            
+            <app-operation [operation]="op" [source]="ops.source" [index]="i+1"></app-operation>
+
+          </div>
+        </div>
+      </div>
+</div>
+
+
+<div class="container" *ngIf="txNotExist">
+    <h1>Transaction does not exist</h1>
+    <small>{{txId}}</small>
+  </div>

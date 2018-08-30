@@ -1,0 +1,193 @@
+<div class="card" *ngIf="operation.type === 'payment'">
+  <div class="card-header">
+    <h5 class="">
+      <span class="pull-left">({{index}}) {{opType}}</span>
+      <span class="pull-right">{{operation.asset.code}} {{operation.amount}}</span>
+    </h5>
+
+  </div>
+  <div class="card-body">
+    <table class="table table-sm table-borderless" *ngIf="operation">
+      <tbody>
+        <tr>
+          <th class="text-right">From</th>
+          <td><a href="#/account/{{source}}">{{source}}</a></td>
+        </tr>
+        <tr>
+          <th class="text-right">To</th>
+          <td><a href="#/account/{{operation.destination}}">{{operation.destination}}</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<div class="card" *ngIf="operation.type === 'setOptions'">
+  <div class="card-header">
+    <h5 class="">
+      <span class="pull-left">({{index}}) {{opType}}</span>
+      <span class="pull-right" *ngIf="operation.inflationDest">Inflation</span>
+    </h5>
+
+  </div>
+  <div class="card-body">
+    <table class="table table-sm table-borderless" *ngIf="operation">
+      <tbody>
+        <tr>
+          <th class="text-right">From</th>
+          <td><a href="#/account/{{source}}">{{source}}</a></td>
+        </tr>
+        <tr>
+          <th class="text-right">Inflation Destination</th>
+          <td><a href="#/account/{{operation.inflationDest}}">{{operation.inflationDest}}</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card" *ngIf="operation.type === 'manageData'">
+  <div class="card-header">
+    <h5 class="">
+      <span class="pull-left">({{index}}) {{opType}}</span>
+      <span class="pull-right" *ngIf="operation.name">{{operation.name}}</span>
+    </h5>
+
+  </div>
+  <div class="card-body">
+    <table class="table table-sm table-borderless" *ngIf="operation">
+      <tbody>
+        <tr>
+          <th class="text-right">From</th>
+          <td><a href="#/account/{{source}}">{{source}}</a></td>
+        </tr>
+        <tr>
+          <th class="text-right">Value</th>
+          <td>{{operation.dataValue}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card" *ngIf="operation.type === 'manageOffer'">
+  <div class="card-header">
+    <h5 class="">
+      <span class="pull-left">({{index}}) {{opType}}</span>
+      <span class="pull-right" *ngIf="operation.name">{{operation.name}}</span>
+    </h5>
+
+  </div>
+  <div class="card-body">
+    <table class="table table-sm table-borderless" *ngIf="operation">
+      <tbody>
+        <tr *ngIf="operation.selling">
+          <th class="text-right">Selling</th>
+          <td *ngIf="operation.selling.issuer">{{operation.selling.code}} - <a href="#/account/{{operation.selling.issuer}}">{{operation.selling.issuer}}</a></td>
+          <td *ngIf="!operation.selling.issuer">{{operation.selling.code}}</td>
+        </tr>
+        <tr *ngIf="operation.buying">
+          <th class="text-right">Buying</th>
+          <td *ngIf="operation.buying.issuer">{{operation.buying.code}} - <a href="#/account/{{operation.buying.issuer}}">{{operation.buying.issuer}}</a></td>
+          <td *ngIf="!operation.buying.issuer">{{operation.buying.code}}</td>
+        </tr>
+        <tr>
+          <th class="text-right">Amount</th>
+          <td>{{operation.amount}}</td>
+        </tr>
+        <tr>
+          <th class="text-right">Price</th>
+          <td>{{operation.price}}</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card" *ngIf="operation.type === 'changeTrust'">
+  <div class="card-header">
+    <h5 class="">
+      <span class="pull-left">({{index}}) {{opType}}</span>
+      <span class="pull-right" *ngIf="operation.limit">Limit
+        <b>{{operation.line.code}}</b> {{operation.limit}}</span>
+    </h5>
+
+  </div>
+  <div class="card-body">
+    <table class="table table-sm table-borderless" *ngIf="operation">
+      <tbody>
+        <tr>
+          <th class="text-right">From</th>
+          <td><a href="#/account/{{source}}">{{source}}</a></td>
+        </tr>
+        <tr>
+          <th class="text-right">Issuer</th>
+          <td><a href="#/account/{{operation.line.issuer}}">{{operation.line.issuer}}</a></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card" *ngIf="operation.type === 'createAccount'">
+  <div class="card-header">
+    <h5 class="">
+      <span class="pull-left">({{index}}) {{opType}}</span>
+      <span class="pull-right" *ngIf="operation.startingBalance">
+        <i>Starting Balance: </i>XLM {{operation.startingBalance}}</span>
+    </h5>
+
+  </div>
+  <div class="card-body">
+    <table class="table table-sm table-borderless" *ngIf="operation">
+      <tbody>
+        <tr>
+          <th class="text-right" *ngIf="source">From</th>
+          <td><a href="#/account/{{source}}">{{source}}</a></td>
+        </tr>
+        <tr>
+          <th class="text-right" *ngIf="operation.destination">Destination</th>
+          <td><a href="#/account/{{operation.destination}}">{{operation.destination}}</a></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card" *ngIf="operation.type === 'accountMerge'">
+  <div class="card-header">
+    <h5 class="">
+      <span class="pull-left">({{index}}) {{opType}}</span>
+      <span class="pull-right"></span>
+    </h5>
+
+  </div>
+  <div class="card-body">
+    <table class="table table-sm table-borderless" *ngIf="operation">
+      <tbody>
+          <tr>
+              <th class="text-right" *ngIf="source">From</th>
+              <td><a href="#/account/{{source}}">{{source}}</a></td>
+            </tr>
+            <tr>
+              <th class="text-right" *ngIf="operation.destination">Destination</th>
+              <td><a href="#/account/{{operation.destination}}">{{operation.destination}}</a></td>
+            </tr>
+    
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <!--<pre>{{operation|json}}</pre>-->
+  </div>
+</div>
+

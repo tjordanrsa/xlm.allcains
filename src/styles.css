@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+body, html {
+    font-family: 'Roboto';
+  }
+  
+body {
+    background-color: #f5f8fa;
+}
+
+.table-borderless td,
+.table-borderless th {
+    border: 0;
+}

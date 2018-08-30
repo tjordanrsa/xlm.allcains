@@ -1,0 +1,23 @@
+<div class="container-fluid">
+
+  <div class="row col-md-12">
+    <div class="card center">
+      <div class="card-header">
+        <h5>Lookup Account</h5>
+      </div>
+      <div class="card-body row-padding">
+
+        <div class="form-group">
+          <label for="acID">Account Public Key</label>
+          <input type="text" class="form-control" id="acID" aria-describedby="acID" placeholder="Enter/Paste account key" [(ngModel)]="accId" (keyup.enter)="findAccount()">
+
+        </div>
+
+        <div class="row">
+          <button type="button" class="btn btn-primary stretch" (click)="findAccount()">Lookup Account</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
