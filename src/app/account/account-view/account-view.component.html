@@ -86,55 +86,55 @@
             <div class="table-responsive-lg fill-width">
               <table class="table table-sm">
                 <thead>
-                  <th scope="col">#</th>
-                  <th>Date</th>
-                  <th>Type</th>
-                  <th>From</th>
-                  <th>To</th>
-                  <th>Value</th>
+                  <th scope="col" nowrap>#</th>
+                  <th nowrap>Date</th>
+                  <th nowrap>Type</th>
+                  <th nowrap>From</th>
+                  <th nowrap>To</th>
+                  <th nowrap>Value</th>
 
                 </thead>
                 <tbody>
                   <tr *ngFor="let operation of accountOps; let i = index">
-                    <th scope="row">{{i + 1}}</th>
-                    <td class="text-nowrap">{{operation.created_at | date:'yyyy-MM-dd HH:mm'}}</td>
-                    <td><a href="#/tx/{{operation.transaction_hash}}">{{operation.txType}}</a></td>
+                    <th scope="row" nowrap>{{i + 1}}</th>
+                    <td class="text-nowrap" nowrap>{{operation.created_at | date:'yyyy-MM-dd HH:mm'}}</td>
+                    <td><a href="#/tx/{{operation.transaction_hash}}" nowrap>{{operation.txType}}</a></td>
 
-                    <td>
+                    <td nowrap>
                       <a href="#/account/{{operation.source_account}}">{{operation.source_account.substring(0,3)}}...{{operation.source_account.substring(operation.source_account.length
                         - 3,operation.source_account.length)}}</a>
                     </td>
-                    <td *ngIf="operation.to && operation.type !== 'create_account'">
+                    <td *ngIf="operation.to && operation.type !== 'create_account'" nowrap>
                       <a href="#/account/{{operation.to}}">{{operation.to.substring(0,3)}}...{{operation.to.substring(operation.to.length - 3,operation.to.length)}}</a>
                     </td>
 
-                    <td *ngIf="operation.account && operation.type === 'create_account'">
+                    <td *ngIf="operation.account && operation.type === 'create_account'" nowrap>
                       <a href="#/account/{{operation.account}}">{{operation.account.substring(0,3)}}...{{operation.account.substring(operation.account.length - 3,operation.account.length)}}</a>
                     </td>
 
-                    <td *ngIf="!operation.to && operation.type !== 'account_merge' && operation.type !== 'create_account'"></td>
-                    <td *ngIf="!operation.to && operation.type === 'account_merge'" colspan="2">
+                    <td *ngIf="!operation.to && operation.type !== 'account_merge' && operation.type !== 'create_account'" nowrap></td>
+                    <td *ngIf="!operation.to && operation.type === 'account_merge'" colspan="2" nowrap>
                       <a href="#/account/{{operation.into}}">{{operation.into.substring(0,3)}}...{{operation.into.substring(operation.into.length - 3,operation.into.length)}}</a>
                     </td>
 
-                    <td *ngIf="operation.type === 'payment' && operation.asset_type!=='native'">
+                    <td *ngIf="operation.type === 'payment' && operation.asset_type!=='native'" nowrap>
 
                       <span *ngIf="accId === operation.source_account" class="payment-out">
                         <i class="fa fa-caret-square-right"></i>{{operation.asset_code}} -{{stellar.numberWithCommas(operation.amount)}}</span>
                       <span *ngIf="accId === operation.to" class="payment-in">
                         <i class="fa fa-caret-square-left"></i>{{operation.asset_code}} {{stellar.numberWithCommas(operation.amount)}}</span>
                     </td>
-                    <td *ngIf="operation.type === 'manage_offer' && operation.buying_asset_code">{{operation.buying_asset_code}} BUY</td>
-                    <td *ngIf="operation.type === 'manage_offer' && !operation.buying_asset_code">{{operation.selling_asset_code}} {{operation.offer_id}}</td>
+                    <td *ngIf="operation.type === 'manage_offer' && operation.buying_asset_code" nowrap>{{operation.buying_asset_code}} BUY</td>
+                    <td *ngIf="operation.type === 'manage_offer' && !operation.buying_asset_code" nowrap>{{operation.selling_asset_code}} {{operation.offer_id}}</td>
 
-                    <td *ngIf="operation.type === 'change_trust'">{{operation.asset_code}}</td>
-                    <td *ngIf="operation.type === 'payment' && operation.asset_type==='native'">
+                    <td *ngIf="operation.type === 'change_trust'" nowrap>{{operation.asset_code}}</td>
+                    <td *ngIf="operation.type === 'payment' && operation.asset_type==='native'" nowrap>
                       <span *ngIf="accId === operation.source_account" class="payment-out">
                         <i class="fa fa-caret-square-right"></i>XLM -{{stellar.numberWithCommas(operation.amount)}}</span>
                       <span *ngIf="accId === operation.to" class="payment-in">
                         <i class="fa fa-caret-square-left"></i>XLM {{stellar.numberWithCommas(operation.amount)}}</span>
                     </td>
-                    <td *ngIf="operation.type === 'create_account'">
+                    <td *ngIf="operation.type === 'create_account'" nowrap>
                       <span class="payment-out">
                         <i class="fa fa-caret-square-right"></i>XLM -{{stellar.numberWithCommas(operation.starting_balance)}}</span>
                     </td>

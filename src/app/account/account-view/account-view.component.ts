@@ -66,6 +66,9 @@ export class AccountViewComponent implements OnInit, OnDestroy {
 
       });
 
+      if (this.cdr) {
+        this.cdr.detectChanges();
+      }
       this.loading = false;
 
       this.accountNotExist = false;
@@ -114,7 +117,7 @@ export class AccountViewComponent implements OnInit, OnDestroy {
 
       });
 
-      this.log.error(this.accountOps);
+      // this.log.error(this.accountOps);
       this.listenForAccChanged();
     });
 

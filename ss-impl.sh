@@ -1,5 +1,5 @@
 #upload to server
-rsync -vaP -e "ssh -p 20050" /Users/tswitch/Projects/crypto/CoinAfrica/AllChains/dist/allchains.zip tjordan@switchersoft.com:~/
+rsync -vaP -e "ssh -p 20050" ./dist/allchains.zip tjordan@switchersoft.com:~/
 
 #extract on server, cd root web
 cd /var/www/allchains.app/web
