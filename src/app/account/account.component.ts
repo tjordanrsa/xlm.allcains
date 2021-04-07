@@ -27,8 +27,6 @@ export class AccountComponent implements OnInit {
   accId: string;
   // accSeq: string;
 
-  // accLoaded = false;
-  // accLoading = false;
 
   constructor(private http: HttpClient, private router: Router) {
 
