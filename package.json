@@ -29,7 +29,7 @@
     "roboto-fontface": "^0.10.0",
     "rxjs": "^6.0.0",
     "stellar-sdk": "^0.13.0",
-    "underscore": "^1.9.1",
+    "underscore": "^1.12.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
