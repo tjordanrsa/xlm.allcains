@@ -28,7 +28,7 @@
     "popper.js": "^1.14.7",
     "roboto-fontface": "^0.10.0",
     "rxjs": "^6.0.0",
-    "stellar-sdk": "^0.13.0",
+    "stellar-sdk": "^8.2.3",
     "underscore": "^1.9.1",
     "zone.js": "^0.8.26"
   },
